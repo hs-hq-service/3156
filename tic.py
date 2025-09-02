@@ -1,7 +1,9 @@
+#!/usr/bin/python3
+
 def print_board(board):
     for row in board:
         print(" | ".join(row))
-        print("-" * 5)
+        print("-" * 9)
 
 def check_winner(board):
     for row in board:
@@ -23,21 +25,29 @@ def check_winner(board):
 def tic_tac_toe():
     board = [[" "]*3 for _ in range(3)]
     player = "X"
-    while not check_winner(board):
+    while not check_winner(board) and any(" " in row for row in board):
         print_board(board)
-        row = int(input("Enter row (0, 1, or 2) for player " + player + ": "))
-        col = int(input("Enter column (0, 1, or 2) for player " + player + ": "))
+        try:
+            row = int(input(f"Enter row (0, 1, or 2) for player {player}: "))
+            col = int(input(f"Enter column (0, 1, or 2) for player {player}: "))
+            if not (0 <= row <= 2 and 0 <= col <= 2):
+                print("Invalid coordinates! Try again.")
+                continue
+        except ValueError:
+            print("Please enter numbers only!")
+            continue
+
         if board[row][col] == " ":
             board[row][col] = player
-            if player == "X":
-                player = "O"
-            else:
-                player = "X"
+            winner = player  # qalibi saxla
+            player = "O" if player == "X" else "X"
         else:
             print("That spot is already taken! Try again.")
 
     print_board(board)
-    print("Player " + player + " wins!")
+    if check_winner(board):
+        print(f"Player {winner} wins!")
+    else:
+        print("It's a tie!")
 
 tic_tac_toe()
-
