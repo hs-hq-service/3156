@@ -1,5 +1,5 @@
 class Checkbook:
-    def __init__(self):
+    def __init__(self) :
         self.balance = 0.0
 
     def deposit(self, amount):
