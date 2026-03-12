@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import sys
 
-for i in range(len(sys.argv)):
+# Dövrü 0-dan yox, 1-ci indeksdən başladırıq
+for i in range(1, len(sys.argv)):
     print(sys.argv[i])
